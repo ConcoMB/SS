@@ -1,0 +1,29 @@
+.well.clearfix
+  = form_for @simulation, :html => { :class => 'form-horizontal' } do |f|
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls
+        = f.text_field :name, :class => 'text_field'
+    .control-group
+      = f.label :method, :class => 'control-label'
+      .controls
+        = f.select :method, options_from_collection_for_select(Simulation.available_methods, :to_s, :humanize), {}, { class: 'chosen' }
+    .control-group
+      = f.label :loss_probability, :class => 'control-label'
+      .controls
+        = f.number_field :loss_probability, :class => 'number_field', step: :any
+    .control-group
+      = f.label :lambda, :class => 'control-label'
+      .controls
+        = f.number_field :lambda, :class => 'number_field', step: :any
+    .control-group
+      = f.label :length_avg, :class => 'control-label'
+      .controls
+        = f.number_field :length_avg, :class => 'number_field', step: :any
+    .control-group
+      = f.label :length_dev, :class => 'control-label'
+      .controls
+        = f.number_field :length_dev, :class => 'number_field', step: :any
+    .actions.pull-right
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), simulations_path, :class => 'btn btn-default'

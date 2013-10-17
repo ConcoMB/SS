@@ -1,0 +1,33 @@
+- model_class = Simulation
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+%p
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
+  = @simulation.name
+%p
+  %strong= model_class.human_attribute_name(:method) + ':'
+  %br
+  = @simulation.method
+%p
+  %strong= model_class.human_attribute_name(:loss_probability) + ':'
+  %br
+  = @simulation.loss_probability
+%p
+  %strong= model_class.human_attribute_name(:lambda) + ':'
+  %br
+  = @simulation.lambda
+%p
+  %strong= model_class.human_attribute_name(:length_avg) + ':'
+  %br
+  = @simulation.length_avg
+%p
+  %strong= model_class.human_attribute_name(:length_dev) + ':'
+  %br
+  = @simulation.length_dev
+
+
+= link_to t('.back', :default => t("helpers.links.back")), simulations_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_simulation_path(@simulation), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), simulation_path(@simulation), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

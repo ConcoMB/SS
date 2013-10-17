@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  method: MyString
+  loss_probability: 1.5
+  lambda: 1.5
+  length_avg: 1.5
+  length_dev: 1.5
+
+two:
+  name: MyString
+  method: MyString
+  loss_probability: 1.5
+  lambda: 1.5
+  length_avg: 1.5
+  length_dev: 1.5
