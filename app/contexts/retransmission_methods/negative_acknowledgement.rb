@@ -1,8 +1,7 @@
-def NegativeAcknowledgement
-  def self.ack
-    segments.each do |segment|
-      rand = Random.rand
-      segment.update_attributes!(ack: rand > @simulation.loss_probability)
+def NegativeAcknowledgement < RetransmissionMethod
+  def ack
+    @simulation.unsent_segments.each do |segment|
+      # TODO
     end
   end
 end

@@ -1,8 +1,14 @@
-def SelectiveRepeat << RetransmissionMethod
-  def self.ack
+def SelectiveRepeat < RetransmissionMethod
+  def ack
     @simulation.unacked_segments.each do |segment|
       rand = Random.rand
-      segment.update_attributes!(ack: rand > @simulation.loss_probability)
+      if rand > @simulation.loss_probability
+        segment.ack = true
+      else
+        segment.increment(:lost)
+      end
+      segment.increment(:transmitted, @simulation.segment_header_size)
+      segment.save!
     end
   end
 end
