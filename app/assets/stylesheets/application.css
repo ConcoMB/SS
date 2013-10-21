@@ -12,3 +12,8 @@
  *= require chosen
  *= require_tree .
  */
+
+.chart {
+  width: 400px;
+  height: 400px;
+}

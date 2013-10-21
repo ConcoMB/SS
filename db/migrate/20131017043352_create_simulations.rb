@@ -7,6 +7,8 @@ class CreateSimulations < ActiveRecord::Migration
       t.float :lambda
       t.float :length_avg
       t.float :length_dev
+      t.integer :total_packets
+
 
       t.timestamps
     end

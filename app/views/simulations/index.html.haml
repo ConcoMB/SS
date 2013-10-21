@@ -12,6 +12,7 @@
         %th= model_class.human_attribute_name(:lambda)
         %th= model_class.human_attribute_name(:length_avg)
         %th= model_class.human_attribute_name(:length_dev)
+        %th= model_class.human_attribute_name(:total_packets)
         %th= model_class.human_attribute_name(:created_at)
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
@@ -24,8 +25,10 @@
           %td= simulation.lambda
           %td= simulation.length_avg
           %td= simulation.length_dev
+          %td= simulation.total_packets
           %td=l simulation.created_at
           %td
+            = link_to "Simulate", simulate_simulation_path(simulation), :method => :post, :class => 'btn btn-xs btn-success'
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_simulation_path(simulation), :class => 'btn btn-default btn-xs'
             = link_to t('.destroy', :default => t("helpers.links.destroy")), simulation_path(simulation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 

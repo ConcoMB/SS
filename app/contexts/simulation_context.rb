@@ -1,31 +1,29 @@
-class SimulateContext
+class SimulationContext
 
   def initialize(simulation)
     @simulation = simulation
-	end
+    @time = 0
+  end
 
-	def handle
-    @simulation.clear_packets
+  def handle
+    @simulation.packets.destroy_all
     @simulation.feed_packets
-    time = 0
-    while @simulation.complete?
-      p = Simulation.next_packet
-      time = Math.max(p.arrival, time)
-      send_packet(packet)
-    end
-	end
-
-  def send_packet(packet)
-    until p.sent?
-      send(p.unsent_segments)
-      ack_time = get_method.new(@simulation).ack
+    @simulation.packets.order(:number).each do |p|
+      @time = [p.arrival, @time].max
+      send_packet(p)
     end
   end
 
-  def send(segments)
+  def send_packet(packet)
+    until packet.sent?
+      send_segments(packet.unsent_segments)
+      @time += get_method.new(@simulation, packet).ack
+    end
+  end
+
+  def send_segments(segments)
     segments.each do |segment|
-      transmission_time = @simulation.segment_size * @simulation.bandwidth
-      @time += transmission_time
+      @time += Simulation.transmission_time(Simulation::SEGMENT_SIZE)
 
       rand = Random.rand
       if rand > @simulation.loss_probability
@@ -35,13 +33,13 @@ class SimulateContext
         segment.increment(:losts)
       end
       
-      segment.increment(:transmitted, @simulation.segment_size)
+      segment.increment(:transmitted, Simulation::SEGMENT_SIZE)
       segment.save!
     end
   end
 
   def get_method
-    @simulation.method.camelize.constantize
+    @simulation.method.downcase.camelize.constantize
   end
 
 end

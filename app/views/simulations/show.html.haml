@@ -26,7 +26,10 @@
   %strong= model_class.human_attribute_name(:length_dev) + ':'
   %br
   = @simulation.length_dev
-
+%p
+  %strong= model_class.human_attribute_name(:total_packets) + ':'
+  %br
+  = @simulation.total_packets
 
 = link_to t('.back', :default => t("helpers.links.back")), simulations_path, :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_simulation_path(@simulation), :class => 'btn btn-default'

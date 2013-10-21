@@ -1,4 +1,4 @@
-def NegativeAcknowledgement < RetransmissionMethod
+class NegativeAcknowledgement < RetransmissionMethod
   def ack
     @simulation.unsent_segments.each do |segment|
       # TODO

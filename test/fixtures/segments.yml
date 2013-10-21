@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  losts: 1
+  transmitted: 1
+  sent: false
+  sent_time: 1
+  ack: false
+
+two:
+  losts: 1
+  transmitted: 1
+  sent: false
+  sent_time: 1
+  ack: false

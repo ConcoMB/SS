@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: 1
+  sent: false
+  size: 1
+  arrival: 1
+
+two:
+  number: 1
+  sent: false
+  size: 1
+  arrival: 1

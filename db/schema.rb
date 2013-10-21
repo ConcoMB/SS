@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017043352) do
+ActiveRecord::Schema.define(version: 20131020223000) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "packets", force: true do |t|
+    t.integer  "number"
+    t.integer  "size"
+    t.integer  "arrival"
+    t.integer  "simulation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "segments", force: true do |t|
+    t.integer  "losts"
+    t.integer  "number"
+    t.integer  "transmitted"
+    t.boolean  "sent",        default: false
+    t.integer  "sent_time"
+    t.boolean  "ack",         default: false
+    t.integer  "packet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "simulations", force: true do |t|
     t.string   "name"
@@ -20,6 +44,7 @@ ActiveRecord::Schema.define(version: 20131017043352) do
     t.float    "lambda"
     t.float    "length_avg"
     t.float    "length_dev"
+    t.integer  "total_packets"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -36,19 +36,17 @@ end
 
 group :development do
 	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+group :debugging, :development do
+  gem 'pry'
+  gem 'debugger'
+  gem 'debugger-pry'
+  gem 'pry-nav'
+  gem 'pry-stack_explorer'
+end
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 
 gem "therubyracer"
 
@@ -61,3 +59,5 @@ gem 'loadjs'
 gem 'gsl'
 
 gem 'inherited_resources'
+
+gem "highcharts-rails", "~> 3.0.0"

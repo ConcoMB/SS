@@ -24,6 +24,10 @@
       = f.label :length_dev, :class => 'control-label'
       .controls
         = f.number_field :length_dev, :class => 'number_field', step: :any
+    .control-group
+      = f.label :total_packets, :class => 'control-label'
+      .controls
+        = f.number_field :total_packets, :class => 'number_field', step: :any
     .actions.pull-right
       = f.submit nil, :class => 'btn btn-primary'
       = link_to t('.cancel', :default => t("helpers.links.cancel")), simulations_path, :class => 'btn btn-default'

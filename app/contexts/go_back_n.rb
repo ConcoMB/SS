@@ -1,14 +1,14 @@
-def GoBackN < RetransmissionMethod
+class GoBackN < RetransmissionMethod
   def ack
     segments = self.consecutive_segments
     rand = Random.rand
     last = segments.order('number ASC').last
     if rand > @simulation.loss_probability
-      segments.each {|segment|segment.update_attributes!(ack: true) }
+      segments.each { |segment| segment.update_attributes!(ack: true) }
     else
       last.increment(:losts)
     end
-    last.increment(:transmitted, @simulation.segment_header_size)
+    last.increment(:transmitted, Simulation::SEGMENT_HEADER_SIZE)
     last.save!
   end
 
