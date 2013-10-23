@@ -6,6 +6,10 @@ class SimulationsController < ApplicationController
     SimulationContext.new(@simulation).handle
   end
 
+  def timeline
+    @simulation = Simulation.find(params[:id])
+  end
+
   def results
     @simulation = Simulation.find(params[:id])
     times = @simulation.packets.map {|p| p.sent_time}
@@ -17,7 +21,8 @@ class SimulationsController < ApplicationController
 
   def state
     @simulation = Simulation.find(params[:id])
-    data = @simulation.packets.where("arrival <= ?", params[:time]).reduce({segments: {arrived: 0, sent:0, lost: 0}, packets: {arrived: 0, sent: 0}}) do |info, p|
+    packets = @simulation.packets.where("arrival <= ?", params[:time])
+    data = packets.reduce({segments: {arrived: 0, sent:0, lost: 0}, packets: {arrived: 0, sent: 0}}) do |info, p|
       losts = p.segments.sum(:losts)
       info[:segments][:lost] += losts
       info[:segments][:sent] += losts + p.segments.size

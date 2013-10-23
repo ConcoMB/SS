@@ -47,6 +47,7 @@ group :debugging, :development do
   gem 'pry-stack_explorer'
 end
 
+gem 'jquery-ui-rails'
 
 gem "therubyracer"
 
