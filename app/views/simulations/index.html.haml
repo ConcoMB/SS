@@ -13,23 +13,37 @@
         %th= model_class.human_attribute_name(:length_avg)
         %th= model_class.human_attribute_name(:length_dev)
         %th= model_class.human_attribute_name(:total_packets)
-        %th= model_class.human_attribute_name(:created_at)
+        %th= model_class.human_attribute_name(:time_mean)
+        %th= model_class.human_attribute_name(:ratio_mean)
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
       - @simulations.each do |simulation|
         %tr
           %td= link_to simulation.id, simulation_path(simulation)
           %td= simulation.name
-          %td= simulation.method
+          %td
+            .label.label-default= simulation.method.humanize
           %td= simulation.loss_probability
           %td= simulation.lambda
           %td= simulation.length_avg
           %td= simulation.length_dev
           %td= simulation.total_packets
-          %td=l simulation.created_at
           %td
-            = link_to "Simulate", simulate_simulation_path(simulation), :method => :post, :class => 'btn btn-xs btn-success'
+            .label.label-info= simulation.time_mean
+          %td
+            .label.label-info= simulation.ratio_mean
+          %td
+            = link_to "Simulate", '#loading', :class => 'simulate btn btn-xs btn-success', :'data-toggle' => 'modal', :'data-url' => simulate_simulation_path(simulation), :'data-timeline-url' => timeline_simulation_path(simulation)
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_simulation_path(simulation), :class => 'btn btn-default btn-xs'
+            = link_to t('.recreate', :default => t("helpers.links.recreate")), timeline_simulation_path(simulation), :class => 'btn btn-default btn-xs'
             = link_to t('.destroy', :default => t("helpers.links.destroy")), simulation_path(simulation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
   = link_to t('.new', :default => t("helpers.links.new")), new_simulation_path, :class => 'btn btn-primary'
+
+#loading.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        // %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title Preparing simulation...
+      .modal-body Please wait :)

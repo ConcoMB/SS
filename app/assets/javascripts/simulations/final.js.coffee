@@ -36,5 +36,7 @@ jQuery ->
   ).done (data) ->
     $("#time").highcharts().series[0].setData(data.times)
     $("#ratios").highcharts().series[0].setData(data.ratios)
+    $('#time-mean').html(data.time_mean)
+    $('#ratio-mean').html(data.ratio_mean)
     
       

@@ -7,6 +7,7 @@ Ss::Application.routes.draw do
       post :simulate
       get :state
       get :timeline
+      get :final
     end
 
   end 

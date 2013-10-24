@@ -15,8 +15,8 @@
 //= require jquery.ui.all
 //= require jquery.timer
 //= require twitter/bootstrap
-//= require turbolinks
+// require turbolinks
 //= require chosen.jquery
 //= require highcharts
 //= require highcharts/highcharts-more
-//= require_tree .
+//= require forms

@@ -1,22 +1,51 @@
 .well
-  #progress-box.clearfix
-    Progress:
-    .progress.progress-striped
-      #progress.progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", role: "progressbar", style: "width: 40%"}
-        %span.sr-only 40% Complete (success)
-  #speed-controls
-    #speed-slider
-    .speed
-      Speed: 
-      #speed.label.label-default= 1
-  Time:
-  #time.label.label-info= 0
-  #results{:'data-url' => state_simulation_path(@simulation), :'data-total-packets' => @simulation.total_packets}
+  #running.clearfix
+    #progress-box.panel.clearfix
+      .panel-heading Progress:
+      .panel-body
+        .progress.progress-striped
+          #progress.progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "40", role: "progressbar", style: "width: 0%"}
+            %span.sr-only 40% Complete (success)
+    #speed-controls.panel
+      .panel-heading
+        .label.label-default
+          %span.glyphicon.glyphicon-time
+          %span Time:
+          %strong#time= 0
+      .panel-body
+        #speed-slider
+        .speed
+          Speed: 
+          %strong#speed= 1
+          %span x
+  #show-results.hide.text-center
+    %a.btn.btn-success{href: final_simulation_path(@simulation)} Show results!
+  #results.clearfix{:'data-url' => state_simulation_path(@simulation), :'data-total-packets' => @simulation.total_packets}
     #sender.panel.panel-default
-      .panel-heading Sender
-      .panel-body
-        .router
+      .panel-heading
+        %span Sender
+        %span.label.label-info#packets-arrived 0
+      .panel-body.clearfix
+        %img.router.pull-left{src: image_path('router.png')}
+    #info.panel.panel-default
+      .panel-heading
+        %span Segments
+        %img.arrow.pull-right{src: image_path('arrow.png')}
+      .panel-body.clearfix
+        %dl.dl-horizontal
+          %dt Arrived:
+          %dd
+            %span.label.label-info#segments-arrived 0
+          %dt Sent
+          %dd
+            %span.label.label-success#segments-sent 0
+          %dt Lost
+          %dd
+            %span.label.label-danger#segments-lost 0
+
     #receiver.panel.panel-default
-      .panel-heading Receiver
+      .panel-heading
+        %span Receiver
+        %span.label.label-success#packets-sent 0
       .panel-body
-        .router
+        %img.router.pull-left{src: image_path('router.png')}
