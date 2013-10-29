@@ -3,15 +3,24 @@
 .panel
   .panel-heading Times
   .panel-body.clearfix
-    #time.chart.pull-left{:"data-type" => "column", :"data-title" => "Sent time", :"data-yAxis" => "Time (ms)"}
+    #time.chart.pull-left{:"data-type" => "line", :"data-title" => "Sent time", :"data-yAxis" => "Time (ms)"}
     %dl.pull-right.dl-horizontal
       %dt Mean:
       %dd
-        #time-mean.label.label-info
+        %span#time-mean.label.label-info
+        %span ms
+      %dt Max:
+      %dd
+        %span#time-max.label.label-alert
+        %span ms
+      %dt Last:
+      %dd
+        %span#time-last.label.label-info
+        %span ms
 .panel
   .panel-heading Ratios
   .panel-body.clearfix
-    #ratios.chart.pull-left{:"data-type" => "column", :"data-title" => "Ratios", :"data-yAxis" => "(Resulting packes / Sent packets)"}
+    #ratios.chart.pull-left{:"data-type" => "pie", :"data-title" => "Ratios", :"data-yAxis" => "(Resulting packes / Sent packets)"}
     %dl.pull-right.dl-horizontal
       %dt Mean:
       %dd

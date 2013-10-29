@@ -5,8 +5,19 @@ class Simulation < ActiveRecord::Base
   BANDWIDTH = 100
   SEGMENT_HEADER_SIZE = 20
 
-  def self.available_methods
-    ['SELECTIVE_REPEAT', 'GO_BACK_N', 'NEGATIVE_ACKNOWLEDGEMENT']
+  class << self
+    def available_methods
+      ['SELECTIVE_REPEAT', 'GO_BACK_N', 'NEGATIVE_ACKNOWLEDGEMENT']
+    end
+
+    def technologies
+      { cable: 0.05, wireless: 0.1, satellite: 0.15 }
+    end
+
+    def demand
+      { domestic: { avg: 50, dev: 5 }, corporation: { avg: 150, dev: 20 }, server: { avg: 300, dev: 50 } } 
+    end
+
   end
 
   validates :method, inclusion: { in: self.available_methods }
@@ -28,11 +39,12 @@ class Simulation < ActiveRecord::Base
   end
 
   def random_packet_size
-    self.length_avg + Random.rand((0-self.length_dev)..self.length_dev)
+    gaussian(self.length_avg, self.length_dev)
   end
 
   def random_arrival_time
-    Random.rand(0..self.lambda)
+    #Random.rand(0..self.lambda)
+    poisson(self.lambda)
   end
 
   def self.transmission_time(size)
@@ -43,4 +55,25 @@ class Simulation < ActiveRecord::Base
     self.packets.find_all{|p| p.sent?}.size == self.packets.size
   end
 
+  private
+    def gaussian(mean, stddev)
+      theta = 2 * Math::PI * Random.rand
+      rho = Math.sqrt(-2 * Math.log(1 - Random.rand))
+      scale = stddev * rho
+      x = mean + scale * Math.cos(theta)
+      y = mean + scale * Math.sin(theta)
+      return x
+    end
+
+    def poisson(lambda) 
+      l = Math::E**(-lambda)
+      k = 0
+      p = 1
+      while p > l
+        k += 1
+        u = Random.rand
+        p *= u
+      end
+      k -1
+    end
 end

@@ -2,6 +2,9 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 .well
+  = 'hola'
+  %span.glyphicon.glyphicon-cog
+
   %table.table.table-striped
     %thead
       %tr
@@ -46,4 +49,7 @@
       .modal-header
         // %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4.modal-title Preparing simulation...
-      .modal-body Please wait :)
+      .modal-body.text-center 
+        %p Please wait
+        %span.glyphicon.glyphicon-cog
+        = image_tag 'spinner.gif'

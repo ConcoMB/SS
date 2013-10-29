@@ -14,7 +14,7 @@ jQuery ->
 
       tooltip:
         headerFormat: "<span style=\"font-size:10px\">{point.key}</span><table>"
-        pointFormat: "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>" + "<td style=\"padding:0\"><b>{point.y:.1f} mm</b></td></tr>"
+        pointFormat: "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>" + "<td style=\"padding:0\"><b>{point.y:.3f} </b></td></tr>"
         footerFormat: "</table>"
         shared: true
         useHTML: true
@@ -37,6 +37,8 @@ jQuery ->
     $("#time").highcharts().series[0].setData(data.times)
     $("#ratios").highcharts().series[0].setData(data.ratios)
     $('#time-mean').html(data.time_mean)
+    $('#time-max').html(data.time_max)
+    $('#time-last').html(data.time_last)
     $('#ratio-mean').html(data.ratio_mean)
     
       

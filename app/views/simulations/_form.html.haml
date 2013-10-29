@@ -9,21 +9,33 @@
       .controls
         = f.select :method, options_from_collection_for_select(Simulation.available_methods, :to_s, :humanize), {}, { class: 'chosen' }
     .control-group
-      = f.label :loss_probability, :class => 'control-label'
+      = label_tag :technology
       .controls
-        = f.number_field :loss_probability, :class => 'number_field', step: :any
+        = select_tag :technology, options_from_collection_for_select(Simulation.technologies.to_a, :last, :first), { class: 'chosen', id: "technology" }
+    .control-group
+      = f.label :loss_probability, :class => 'control-label'
+      %span [0..1]
+      .controls
+        = f.number_field :loss_probability, :class => 'number_field', step: :any, id: 'lossP'
     .control-group
       = f.label :lambda, :class => 'control-label'
+      %span [paquetes/ms]
       .controls
         = f.number_field :lambda, :class => 'number_field', step: :any
     .control-group
-      = f.label :length_avg, :class => 'control-label'
+      = label_tag :demand
       .controls
-        = f.number_field :length_avg, :class => 'number_field', step: :any
+        = select_tag :demand, options_from_collection_for_select(Simulation.demand.to_a, :last, :first), { class: 'chosen', id: 'demand'}
+    .control-group
+      = f.label :length_avg, :class => 'control-label'
+      %span [bytes]
+      .controls
+        = f.number_field :length_avg, :class => 'number_field', step: :any, id: "avg"
     .control-group
       = f.label :length_dev, :class => 'control-label'
+      %span [bytes]
       .controls
-        = f.number_field :length_dev, :class => 'number_field', step: :any
+        = f.number_field :length_dev, :class => 'number_field', step: :any, id: "dev"
     .control-group
       = f.label :total_packets, :class => 'control-label'
       .controls

@@ -1,2 +1,3 @@
 jQuery ->
-	$('select.chosen').chosen()
+  $('select.chosen').chosen()
+    
