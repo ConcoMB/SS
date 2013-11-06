@@ -15,7 +15,7 @@ class Simulation < ActiveRecord::Base
     end
 
     def demand
-      { domestic: { avg: 50, dev: 5 }, corporation: { avg: 150, dev: 20 }, server: { avg: 300, dev: 50 } } 
+      { domestic: { avg: 200, dev: 50 }, corporation: { avg: 300, dev: 20 }, server: { avg: 300, dev: 100 } }
     end
 
   end
@@ -65,7 +65,7 @@ class Simulation < ActiveRecord::Base
       return x
     end
 
-    def poisson(lambda) 
+    def poisson(lambda)
       l = Math::E**(-lambda)
       k = 0
       p = 1

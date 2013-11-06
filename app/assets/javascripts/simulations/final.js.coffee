@@ -27,7 +27,7 @@ jQuery ->
       series: [
         data: []
       ]
-      
+
   $.ajax(
     type: "GET",
     url: "/simulations/" + $("#sim").data("id") + "/results"
@@ -40,5 +40,5 @@ jQuery ->
     $('#time-max').html(data.time_max)
     $('#time-last').html(data.time_last)
     $('#ratio-mean').html(data.ratio_mean)
-    
-      
+
+

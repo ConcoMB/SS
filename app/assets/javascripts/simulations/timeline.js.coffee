@@ -8,6 +8,10 @@ jQuery ->
     $('#segments-sent').html(data.state.segments.sent)
     $('#segments-arrived').html(data.state.segments.arrived)
     $('#segments-lost').html(data.state.segments.lost)
+    if window.lastArrived < data.state.packets.arrived || window.lastSent < data.state.packets.sent
+      bufferChart.highcharts().series[0].addPoint(data.state.bufferSize)
+      window.lastArrived = data.state.packets.arrived
+      window.lastSent = data.state.packets.sent
 
   requestResults = ->
     #console.log('updating...')
@@ -45,10 +49,40 @@ jQuery ->
       value = $('#speed-slider').slider('value')
       $('#speed').html(value)
       ticker.reset(calculateTimeout(value))
-  timer = $.timer(100, requestResults, false)
+  timer = $.timer(200, requestResults, false)
   ticker = $.timer(calculateTimeout(slider.slider('value')), tick, false)
 
   $('#stop').click ->
     timer.stop()
     ticker.stop()
     $('#envelope').hide()
+
+  window.lastArrived = 0
+  window.lastSent = 0
+  bufferChart = $('#bufferChart').highcharts
+      chart:
+        type: 'line'
+
+      title:
+        text: 'Buffer Size'
+
+      yAxis:
+        min: 0
+        title:
+          text: $(this).data("yAxis")
+
+      tooltip:
+        headerFormat: "<span style=\"font-size:10px\">{point.key}</span><table>"
+        pointFormat: "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>" + "<td style=\"padding:0\"><b>{point.y:.3f} </b></td></tr>"
+        footerFormat: "</table>"
+        shared: true
+        useHTML: true
+
+      plotOptions:
+        column:
+          pointPadding: 0.2
+          borderWidth: 0
+
+      series: [
+        data: []
+      ]

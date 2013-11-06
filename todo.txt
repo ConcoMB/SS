@@ -1,7 +1,7 @@
 
 X poner las tecnologias con perdida con rango
 
-X unidades de medida en la creacion 
+X unidades de medida en la creacion
 
 X asociar nichos de demanda
 
@@ -15,6 +15,5 @@ X el progress bar esta solo del q mande
 
 medir cuanto tiempo despues de que mande todo, el simulador termina.
 
-medir la cantidad de paquetes en el sistema en el tiempo. tendria q ser triangular -> nueva variable de control
-
+medir la cantidad de paquetes en el sistema en el tiempo. tendria q ser triangular -> nueva funcion objetivo
 graficar en la simluacion, el tamanio de elementos en el sistema

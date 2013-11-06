@@ -18,7 +18,7 @@
       .panel-body
         #speed-slider
         .speed
-          Speed: 
+          Speed:
           %strong#speed= 1
           %span x
   #show-results.hide.text-center
@@ -35,7 +35,7 @@
         .panel-heading
           %span Segments
           / %img.arrow.pull-right{src: image_path('arrow.png')}
-        
+
         .panel-body.clearfix
           / = image_tag 'envelope.gif', id: 'envelope'
           %dl.dl-horizontal
@@ -55,5 +55,8 @@
         %span.label.label-success#packets-sent 0
       .panel-body
         %img.router.pull-left{src: image_path('router.gif')}
-= render 'data', simulation: @simulation
+.clearfix
+  .pull-left
+    = render 'data', simulation: @simulation
+  #bufferChart.pull-right
 %a.btn.btn-danger#stop{href: '#'} Stop!
