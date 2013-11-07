@@ -1,6 +1,11 @@
 Ss::Application.routes.draw do
   
   resources :simulations do 
+
+    collection do
+      post :compare
+      get :compare_data
+    end
     
     member do
       get :results

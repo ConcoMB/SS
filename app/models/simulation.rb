@@ -55,6 +55,11 @@ class Simulation < ActiveRecord::Base
     self.packets.find_all{|p| p.sent?}.size == self.packets.size
   end
 
+  def technology
+    probabilities = self.class.technologies.map{|t,p| p}
+    self.class.technologies.select {|t,p| p == closest_float(probabilities ,loss_probability)}.first.first
+  end
+
   private
     def gaussian(mean, stddev)
       theta = 2 * Math::PI * Random.rand
@@ -76,4 +81,8 @@ class Simulation < ActiveRecord::Base
       end
       k -1
     end
+
+    def closest_float(xs, value)
+      xs.min_by { |x| (x.to_f - value).abs }
+    end 
 end

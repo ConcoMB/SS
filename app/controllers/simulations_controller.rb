@@ -51,6 +51,28 @@ class SimulationsController < ApplicationController
     render json: {state: data}
   end
 
+  def compare
+    @simulations = Simulation.find(params[:simulation_ids])
+  end
+
+  def compare_data
+    @simulations = Simulation.find(params[:simulation_ids])
+    data = {time: {}, ratio:{}}
+    Simulation.available_methods.each do |method|
+      data[:time][method.underscore] = []
+      data[:ratio][method.underscore] = []
+      Simulation.technologies.each do |t, p|
+        matched = @simulations.select {|s| s.method == method && s.technology == t}
+        time_mean = matched.empty? ? 0 : matched.map(&:time_mean).mean
+        ratio_mean = matched.empty? ? 0 : matched.map(&:ratio_mean).mean
+        data[:time][method.underscore] << time_mean
+        data[:ratio][method.underscore] << ratio_mean
+      end
+    end
+    data[:simulations] = @simulations
+    render json: data
+  end
+
   private
 
     def resource_params
