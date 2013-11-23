@@ -15,7 +15,7 @@ class Simulation < ActiveRecord::Base
     end
 
     def demand
-      { domestic: { avg: 200, dev: 50 }, corporation: { avg: 300, dev: 20 }, server: { avg: 300, dev: 100 } }
+      { domestic: { avg: 200, dev: 50 , lambda: 11}, corporation: { avg: 300, dev: 20, lambda: 9 }, server: { avg: 300, dev: 100, lambda: 5 } }
     end
 
   end

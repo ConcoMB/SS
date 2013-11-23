@@ -18,14 +18,14 @@
       .controls
         = f.number_field :loss_probability, :class => 'number_field', step: :any, id: 'lossP'
     .control-group
-      = f.label 'Time between arrivals', :class => 'control-label'
-      %span [ms]
-      .controls
-        = f.number_field :lambda, :class => 'number_field', step: :any
-    .control-group
       = label_tag :demand
       .controls
         = select_tag :demand, options_from_collection_for_select(Simulation.demand.to_a, :last, :first), { class: 'chosen', id: 'demand'}
+    .control-group
+      = f.label 'Time between arrivals', :class => 'control-label'
+      %span [ms]
+      .controls
+        = f.number_field :lambda, :class => 'number_field', step: :any, id: "lambda"
     .control-group
       = f.label :length_avg, :class => 'control-label'
       %span [bytes]
