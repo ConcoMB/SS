@@ -18,8 +18,8 @@
       .controls
         = f.number_field :loss_probability, :class => 'number_field', step: :any, id: 'lossP'
     .control-group
-      = f.label :lambda, :class => 'control-label'
-      %span [paquetes/ms]
+      = f.label 'Time between arrivals', :class => 'control-label'
+      %span [ms]
       .controls
         = f.number_field :lambda, :class => 'number_field', step: :any
     .control-group
