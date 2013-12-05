@@ -8,6 +8,7 @@ jQuery ->
     $('#segments-sent').html(data.state.segments.sent)
     $('#segments-arrived').html(data.state.segments.arrived)
     $('#segments-lost').html(data.state.segments.lost)
+    $("#times").highcharts().series[0].setData(data.times)
     if window.lastArrived < data.state.packets.arrived || window.lastSent < data.state.packets.sent
       bufferChart.highcharts().series[0].addPoint(data.state.bufferSize)
       window.lastArrived = data.state.packets.arrived
@@ -62,9 +63,41 @@ jQuery ->
   bufferChart = $('#bufferChart').highcharts
       chart:
         type: 'line'
+        width: 500
+        height: 300
 
       title:
         text: 'Buffer Size'
+
+      yAxis:
+        min: 0
+        title:
+          text: $(this).data("yAxis")
+
+      tooltip:
+        headerFormat: "<span style=\"font-size:10px\">{point.key}</span><table>"
+        pointFormat: "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>" + "<td style=\"padding:0\"><b>{point.y:.3f} </b></td></tr>"
+        footerFormat: "</table>"
+        shared: true
+        useHTML: true
+
+      plotOptions:
+        column:
+          pointPadding: 0.2
+          borderWidth: 0
+
+      series: [
+        data: []
+      ]
+  $("#times").each ->
+    $(this).highcharts
+      chart:
+        width: 450
+        height: 300
+        type: $(this).data("type")
+
+      title:
+        text: $(this).data("title")
 
       yAxis:
         min: 0

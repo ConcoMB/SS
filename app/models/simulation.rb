@@ -11,11 +11,11 @@ class Simulation < ActiveRecord::Base
     end
 
     def technologies
-      { cable: 0.05, wireless: 0.1, satellite: 0.15 }
+      { cable: 0.01, wireless: 0.02, satellite: 0.05 }
     end
 
     def demand
-      { domestic: { avg: 200, dev: 50 , lambda: 11}, corporation: { avg: 300, dev: 20, lambda: 9 }, server: { avg: 300, dev: 100, lambda: 5 } }
+      { domestic: { avg: 200, dev: 50 , lambda: 11}, corporation: { avg: 400, dev: 20, lambda: 18 }, server: { avg: 150, dev: 60, lambda: 9 } }
     end
 
   end
@@ -39,7 +39,7 @@ class Simulation < ActiveRecord::Base
   end
 
   def random_packet_size
-    gaussian(self.length_avg, self.length_dev)
+    [gaussian(self.length_avg, self.length_dev), 5].max
   end
 
   def random_arrival_time

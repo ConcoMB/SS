@@ -24,4 +24,13 @@ class Packet < ActiveRecord::Base
     segments.order(:sent_time).last.sent_time - arrival
   end
 
+  class << self
+    def sent
+      sent_count = joins(:segments).where(segments: {ack:true, sent:true}).count(group: :packet_id)
+      total_count = joins(:segments).count(group: :packet_id)
+      pids = sent_count.select {|pid, count| count == total_count[pid]}.keys
+      where(id: pids)
+    end
+  end
+
 end

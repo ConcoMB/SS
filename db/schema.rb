@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024031812) do
+ActiveRecord::Schema.define(version: 20131201143109) do
 
   create_table "packets", force: true do |t|
     t.integer  "number"
@@ -46,6 +46,10 @@ ActiveRecord::Schema.define(version: 20131024031812) do
     t.datetime "updated_at"
     t.float    "time_mean"
     t.float    "ratio_mean"
+    t.float    "time_min"
+    t.float    "time_max"
+    t.float    "ratio_min"
+    t.float    "ratio_max"
   end
 
 end

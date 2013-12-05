@@ -1,4 +1,4 @@
-.well
+.well.clearfix
   #running.clearfix
     #progress-box.panel.clearfix
       .panel-heading Progress:
@@ -23,7 +23,7 @@
           %span x
   #show-results.hide.text-center
     %a.btn.btn-success{href: final_simulation_path(@simulation)} Show results!
-  #results.clearfix{:'data-url' => state_simulation_path(@simulation), :'data-total-packets' => @simulation.total_packets}
+  #results.pull-right.clearfix{:'data-url' => state_simulation_path(@simulation), :'data-total-packets' => @simulation.total_packets}
     #sender.panel.panel-default
       .panel-heading
         %div Sender
@@ -55,8 +55,10 @@
         %span.label.label-success#packets-sent 0
       .panel-body
         %img.router.pull-left{src: image_path('router.gif')}
-.clearfix
   .pull-left
     = render 'data', simulation: @simulation
+.clearfix
   #bufferChart.pull-right
+  / #ratios.pull-left{:"data-type" => "pie", :"data-title" => "Ratios", :"data-yAxis" => "(Resulting packes / Sent packets)"}
+  #times.chart.pull-left{:"data-type" => "line", :"data-title" => "Sent time", :"data-yAxis" => "Time (ms)"}
 %a.btn.btn-danger#stop{href: '#'} Stop!

@@ -23,6 +23,16 @@ jQuery ->
         column:
           pointPadding: 0.2
           borderWidth: 0
+        pie:
+          allowPointSelect: true
+          cursor: 'pointer'
+          dataLabels:
+              formatter: ->
+                Math.round(this.percentage, 4) + '%'
+          showInLegend: true
+
+      legend:
+        align: 'left'
 
       series: [
         data: []

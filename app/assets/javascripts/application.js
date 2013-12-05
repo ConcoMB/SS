@@ -20,3 +20,5 @@
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require forms
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap3

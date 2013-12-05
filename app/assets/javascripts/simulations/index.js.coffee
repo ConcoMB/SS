@@ -1,4 +1,8 @@
 jQuery ->
+  $('.datatable').dataTable({
+    "sPaginationType": "bootstrap"
+    "iDisplayLength": 50
+  });
   $('.simulate').click ->
     console.log('Simulating... ')
     $.ajax

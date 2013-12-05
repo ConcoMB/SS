@@ -1,10 +1,10 @@
 jQuery ->
   timeChart = $("#time-chart").highcharts
     chart:
-      type: "bar"
+      type: "columnrange"
 
     title:
-      text: "Simulation Comparation"
+      text: "Sent Time Comparation"
 
     xAxis:
       categories: ["Cable", "Wireless", "Sattelite"]
@@ -49,10 +49,10 @@ jQuery ->
 
   ratioChart = $("#ratio-chart").highcharts
     chart:
-      type: "bar"
+      type: "columnrange"
 
     title:
-      text: "Simulation Comparation"
+      text: "Ratio Comparation"
 
     xAxis:
       categories: ["Cable", "Wireless", "Sattelite"]
